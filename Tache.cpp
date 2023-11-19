@@ -1,13 +1,13 @@
 #include "central.h"
 #include "Tache.h"
 
-Tache :: Tache(str nom, str description, int priorite, str avancement, int delai)
+Tache :: Tache(str nom, str description, int priorite, str avancement)
 {
+    cout << GRN "Tâche " << nom << " créée avec succés" << endl << endl;
     this->nom = nom;
     this->descritpion = description;
     this->priorite = priorite;
     this->avancement = avancement;
-    this->delai = delai;
 }
 
 void Tache :: UpdatePriorité(int newPriorite)
@@ -42,11 +42,6 @@ int Tache :: GetPriorite()
 str Tache :: GetAvancement()
 {
     return avancement;
-}
-
-int Tache :: GetDelai()
-{
-    return delai;
 }
 
 void Tache :: GetInfo()

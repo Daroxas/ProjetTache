@@ -8,10 +8,9 @@ public :
     str descritpion;
     int priorite;
     str avancement;
-    int delai;
 
     Tache() = default;
-    Tache(str nom, str description, int priorite, str avancement, int delai);
+    Tache(str nom, str description, int priorite, str avancement);
 
     void UpdatePriorité(int newPriorite);
     void UpdateAvancement(str newAvancement);
@@ -20,7 +19,6 @@ public :
     str GetDescription();
     int GetPriorite();
     str GetAvancement();
-    int GetDelai();
 
     void GetInfo();
 
