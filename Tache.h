@@ -10,6 +10,7 @@ public :
     str avancement;
     int delai;
 
+    Tache() = default;
     Tache(str nom, str description, int priorite, str avancement, int delai);
 
     void UpdatePriorité(int newPriorite);
