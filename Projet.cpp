@@ -78,3 +78,37 @@ Tache* Projet :: SelectionnerTache(str nom, const Projet& projet)
 
     cout << RED "Erreur, la tâche spécifié n'existe pas" << endl << endl;
 }
+
+void Projet :: AfficherCollectionTache()
+{
+    auto it = listeTache.begin();
+
+    while (it != listeTache.end())
+    {
+        Tache* tache = it->second;
+        cout << NC << tache->GetNom() << endl;
+
+        it++;
+    }
+
+    cout << endl;
+}
+
+void Projet :: AfficherListeProjets()
+{
+    auto it = listeProjet.begin();
+
+    while (it != listeProjet.end())
+    {
+        Projet* projet = it->second;
+        cout << NC << projet->GetNom() << endl;
+    }
+
+    cout << endl;
+}
+
+void Projet :: GetInfo()
+{
+    cout << NC "Nom du projet : " << GetNom() << endl;
+    cout << "Description : " << GetDescription() << endl << endl;
+}

@@ -25,6 +25,10 @@ public :
     str GetNom();
     str GetDescription();
 
+    void AfficherCollectionTache();
+    void AfficherListeProjets();
+    void GetInfo();
+
     bool ProjetExists(str projet);
     bool TacheExists(str tache);
 };
