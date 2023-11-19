@@ -25,7 +25,7 @@ public :
     str GetDescription();
 
     void AfficherCollectionTache();
-    void AfficherListeProjets();
+    static void AfficherListeProjets();
     void GetInfo();
 
     static bool ListeProjetVide();

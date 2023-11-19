@@ -48,9 +48,10 @@ int main()
     cout << "Que voulez vous faire ?" NC << endl << endl;
     cout << YLW "1) Créer un nouveau projet" << endl;
     cout << "2) Manage un projet" << endl;
-    cout << "3) Supprimer un projet" << endl;
-    cout << "4) Manage l'équipe projet (seulement lorsqu'un projet est déjà existant et que des tâches on été attribué à ce dernier)" << endl;
-    cout << "5) Fermer le système de gestion" NC << endl << endl;
+    cout << "3) Afficher la liste des projets en cours" << endl;
+    cout << "4) Supprimer un projet" << endl;
+    cout << "5) Manage l'équipe projet (seulement lorsqu'un projet est déjà existant et que des tâches on été attribué à ce dernier)" << endl;
+    cout << "6) Fermer le système de gestion" NC << endl << endl;
     cout << GRN "Votre choix : " NC;
 
     Choix(choix);
@@ -63,7 +64,7 @@ int main()
 
         cout << GRN "Nom du projet : " NC;
         getline(cin, nomProjet);
-        cout << GRN "Description du projet : " NC;
+        cout << GRN "\nDescription du projet : " NC;
         getline(cin, description);
 
         if(!nomProjet.empty() && !description.empty())
@@ -71,8 +72,12 @@ int main()
             Projet* projet = new Projet(nomProjet, description);
             break;
         }
+        
+        NewPage();
 
         cout << RED "Erreur vous n'avez pas précisé le nom ou la description du projet" NC << endl << endl;
+        
+        sleep(3);
         break;
 
     case 2:
@@ -87,7 +92,7 @@ int main()
             {
                 NewPage();
 
-                cout << RED "Erreur vous n'avez précisé le projet que je vous souhaiter gérer" NC << endl << endl;
+                cout << RED "\nErreur vous n'avez précisé le projet que je vous souhaiter gérer" NC << endl << endl;
             
                 sleep(3);
                 break;
@@ -99,7 +104,182 @@ int main()
             {
                 NewPage();
 
+                cout << YLW "1) Obtenir les informations sur le projet" << endl;
+                cout << "2) Ajouter une tâche au projet" << endl;
+                cout << "3) Retiré une tache du projet" << endl;
+                cout << "4) Modifié une tache" << endl;
+                cout << "5) Afficher la liste des taches dans le projet" << endl;
+                cout << "6) Enregistré le projet" NC << endl << endl;
+                cout << GRN "Votre choix : ";
 
+                Choix(choix);
+
+                switch (choix)
+                {
+                case 1:
+                    NewPage();
+
+                    projet->GetInfo();
+
+                    sleep(3);
+                    break;
+                
+                case 2:
+
+                    cout << GRN "Nom de la tâche : " NC;
+                    getline(cin, nomTache);
+                    cout << GRN "\nDescription de la tâche : " NC;
+                    getline(cin, description);
+                    cout << GRN "\nPriorité de la tâche [4 Longue durée : 3 Basse : 2 Moyenne : 1 Haute : 0 Hard-Deadline]\n: " NC;
+                    cin >> priorite;
+                    cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                    cout << GRN "\nAvancement actuel de la tâche : " NC;
+                    getline(cin, avancement);
+
+                    if (!nomTache.empty() && !description.empty() && priorite >= 0 && priorite <= 4 && !avancement.empty() )
+                    {
+                        NewPage();
+
+                        projet->AddTache(nomTache, description, priorite, avancement);
+
+                        sleep(3);
+                        break;
+                    }
+
+                    NewPage();
+
+                    cout << RED "Erreur vous n'avez pas rempli un des champs demandé correctement" NC << endl << endl;
+
+                    sleep(3);
+                    break;
+
+                case 3:
+
+                    NewPage();
+
+                    cout << GRN "Nom de la tâche à supprimer : " NC;
+                    getline(cin, nomTache);
+
+                    if(!nomTache.empty())
+                    {
+                        NewPage();
+
+                        projet->RemoveTache(nomTache);
+
+                        sleep(3);
+                        break;
+                    }
+
+                    NewPage();
+
+                    cout << RED "Erreur vous n'avez pas précisé la tâche à supprimer" NC << endl << endl;
+
+                    sleep(3);
+                    break;
+
+                case 4: 
+                    NewPage();
+
+                    cout << GRN "Nom de la tâche à modifier : " NC;
+                    getline(cin, nomTache);
+
+                    if(!nomTache.empty())
+                    {
+                        Tache* tache = projet->SelectionnerTache(nomTache, *projet);
+                        while(tache != nullptr)
+                        {
+                            NewPage();
+
+                            cout << YLW "1) Update la priorité" << endl;
+                            cout << "2) Update l'avancement" << endl;
+                            cout << "3) Enregistré les changements" NC << endl << endl;
+                            cout << GRN "Votre choix : " NC;
+                            
+                            Choix(choix);
+
+                            switch (choix)
+                            {
+                            case 1:
+                                NewPage();
+
+                                cout << GRN "Nouvelle priorité [comme précédemment] : " NC;
+                                cin >> priorite;
+                                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+
+                                if (priorite >= 0 && priorite <= 4)
+                                {
+                                    NewPage();
+
+                                    tache->UpdatePriorité(priorite);
+
+                                    sleep(3);
+                                    break;
+                                }
+
+                                NewPage();
+
+                                cout << RED "Erreur vous n'avez pas entré une valeur valide pour la priorité" NC << endl << endl;
+
+                                sleep(3);
+                                break;
+                            
+                            case 2:
+                                NewPage();
+
+                                cout << GRN "Nouvel avancement de la tâche" NC;
+                                getline(cin, avancement);
+
+                                if(!avancement.empty())
+                                {
+                                    NewPage();
+
+                                    tache->UpdateAvancement(avancement);
+
+                                    sleep(3);
+                                    break;
+                                }
+
+                                NewPage();
+
+                                cout << RED "Erreur vous n'avez pas précisé de nouvel état d'avancement" NC << endl << endl;
+
+                                sleep(3);
+                                break;
+                            case 3:
+                                NewPage();
+
+                                cout << CYN "Changements enregistrés avec succés" NC << endl;
+                                
+                                sleep(3);
+                                tache = nullptr;
+                                break;
+
+                            default:
+                                break;
+                            }
+                        }
+                    }
+                
+                case 5:
+                    NewPage();
+
+                    projet->AfficherCollectionTache();
+
+                    sleep(3);
+                    break;
+                
+                case 6:
+                    NewPage();
+
+                    cout << CYN "Changement sur le projet enregistrer avec succés" NC << endl << endl;
+
+                    sleep(3);
+                    projet = nullptr;
+                    break;
+                    
+                default:
+                    break;
+                }
             }
         }
 
@@ -107,7 +287,12 @@ int main()
     case 3:
 
         break;
+
     case 4:
+
+        break;
+
+    case 5:
         if (Projet :: ListeProjetVide())
         {
             cout << RED "Vous ne pouvez pas gérer une équipe projet sans avoir de projet défini au préalable." NC << endl << endl;
@@ -124,6 +309,7 @@ int main()
                 cout << "5) Obtenir la charge de travail d'un membre" << endl;
                 cout << "6) Obtenir les informations d'une tâche assigner à un membre" << endl;
                 cout << "7) Valider l'équipe projet et l'attribution des tâches" NC << endl << endl;
+                cout << GRN "Votre choix : ";
 
                 Choix(choix);
 
