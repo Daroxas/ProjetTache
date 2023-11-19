@@ -46,8 +46,9 @@ str Tache :: GetAvancement()
 
 void Tache :: GetInfo()
 {
+    cout << GRN "Information sur la tâche : " << endl << endl;
     cout << NC "Nom : " << GetNom() << endl;
     cout << "Description : " << GetDescription() << endl;
     cout << "Priorité : " << GetPriorite() << endl;
-    cout << "Délai de complétion (jours) : " << GetDelai() << endl << endl;
+    cout << "Avancement : " << GetAvancement() << endl;
 }
