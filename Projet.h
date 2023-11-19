@@ -19,7 +19,7 @@ public :
     static Projet* SelectionnerProjet(str projet);
     static Tache* SelectionnerTache(str nom, const Projet& projet);
 
-    void AddTache(str nom, str description, int priorité, str avancement, int delai);
+    void AddTache(str nom, str description, int priorite, str avancement);
     void RemoveTache(str nom);
 
     str GetNom();

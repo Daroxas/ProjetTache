@@ -1,7 +1,7 @@
 #include "central.h"
 #include "Tache.h"
 
-class TachePrio : protected Tache
+class TachePrio : public Tache
 {
 public :
     str deadline;
@@ -9,4 +9,5 @@ public :
     TachePrio(str nom, str description, int priorite, str avancement, str deadline);
 
     str GetDeadline();
+    void GetInfo();
 };

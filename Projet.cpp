@@ -1,6 +1,8 @@
 #include "central.h"
 #include "Projet.h"
 #include "Tache.h"
+#include "TachePrio.h"
+#include "TacheLongue.h"
 
 
 bool Projet :: ProjetExists(str projet)
@@ -36,12 +38,33 @@ str Projet :: GetDescription()
     return description;
 }
 
-void Projet :: AddTache(str nom, str description, int priorité, str avancement, int delai)
+void Projet :: AddTache(str nom, str description, int priorite, str avancement)
 {
     if (!TacheExists(nom))
     {
-        cout << GRN "Tâche '" << nom << "' créée avec succés" << endl << endl;
-        Tache* tache = new Tache(nom, description, priorité, avancement, delai);
+        if (priorite == 0)
+        {
+            str deadline;
+            cout << GRN "Veuillez entrer une deadline pour votre tâche urgente (date limite)" << endl;
+            cout << NC "Deadline : ";
+            getline(cin, deadline);
+
+            Tache* tache = new TachePrio(nom, description, priorite, avancement, deadline);
+            listeTache[tache->nom] = tache;
+        }   
+
+        if (priorite == 4)
+        {
+            int delai;
+            cout << GRN "Veuillez entrer un délai pour votre tâche longue durée (Nombre de jours)" << endl;
+            cout << NC "Délai : ";
+            cin >> delai;
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+
+            Tache* tache = new TacheLongue(nom, description, priorite, avancement, delai);
+            listeTache[tache->nom] = tache;
+        }
+        Tache* tache = new Tache(nom, description, priorite, avancement);
         listeTache[tache->nom] = tache;
     }
 
@@ -86,6 +109,14 @@ void Projet :: AfficherCollectionTache()
     while (it != listeTache.end())
     {
         Tache* tache = it->second;
+        if (tache->GetPriorite() == 0)
+        {
+            cout << RED << tache->GetNom() << endl;
+        }
+        if (tache->GetPriorite() == 4)
+        {
+            cout << YLW << tache->GetNom() << endl;
+        }
         cout << NC << tache->GetNom() << endl;
 
         it++;
