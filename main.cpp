@@ -12,7 +12,7 @@ void NewPage()
     cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 }
 
-int Choix(int &choix)
+void Choix(int &choix)
 {
     try
     {
@@ -276,7 +276,7 @@ int main()
                     sleep(3);
                     projet = nullptr;
                     break;
-                    
+
                 default:
                     break;
                 }
@@ -365,6 +365,7 @@ int main()
                     break;
 
                 case 3:
+                {
                     NewPage();
                     
                     cout << GRN "Nom du membre à qui attribuer la tâche : " NC;
@@ -402,8 +403,10 @@ int main()
                     
                     sleep(3);
                     break;
+                }
 
                 case 4:
+                {
                     NewPage();
 
                     cout << GRN "Nom du membre pour qui il faut supprimer la tâche : " NC;
@@ -437,8 +440,9 @@ int main()
                     
                     sleep(3);
                     break;
-                
+                }
                 case 5:
+                {
                     NewPage();
 
                     cout << GRN "Nom du membre pour qui il récupérer la charge de travail : " NC;
@@ -460,8 +464,9 @@ int main()
                     
                     sleep(3);
                     break;
-
+                }
                 case 6:
+                {
                     NewPage();
 
                     cout << GRN "Nom du membre pour qui il récupérer les informations de la tâche : " NC;
@@ -496,7 +501,7 @@ int main()
 
                     sleep(3);
                     break;
-
+                }
                 case 7:
                     NewPage();
 

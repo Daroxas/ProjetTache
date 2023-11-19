@@ -1,4 +1,6 @@
+#pragma once
 #include "central.h"
+#include "Projet.h"
 #include "Tache.h"
 
 class Membre
