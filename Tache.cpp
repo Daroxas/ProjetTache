@@ -50,5 +50,5 @@ void Tache :: GetInfo()
     cout << NC "Nom : " << GetNom() << endl;
     cout << "Description : " << GetDescription() << endl;
     cout << "Priorité : " << GetPriorite() << endl;
-    cout << "Avancement : " << GetAvancement() << endl;
+    cout << "Avancement : " << GetAvancement() << endl << endl;
 }
