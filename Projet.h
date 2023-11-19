@@ -13,7 +13,6 @@ protected :
 public :
 
     Projet();
-    Projet(str);
     Projet(str nom, str description);
 
     static Projet* SelectionnerProjet(str projet);

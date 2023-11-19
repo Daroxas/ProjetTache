@@ -95,11 +95,11 @@ Projet* Projet :: SelectionnerProjet(str projet)
     }
 }
 
-Tache* Projet :: SelectionnerTache(str nom)
+Tache* Projet :: SelectionnerTache(str nom, const Projet& projet)
 {
-    auto it = listeTache.find(nom);
+    auto it = projet.listeTache.find(nom);
     
-    if(it != listeTache.end())
+    if(it != projet.listeTache.end())
     {
         return it->second;
     }
