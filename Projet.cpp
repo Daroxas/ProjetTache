@@ -15,6 +15,11 @@ bool Projet :: TacheExists(str tache)
     return listeTache.find(tache) != listeTache.end();
 }
 
+bool Projet :: ListeProjetVide()
+{
+    return listeProjet.empty();
+}
+
 Projet :: Projet(str nom, str description)
 {
     if (!ProjetExists(nom))
@@ -90,11 +95,11 @@ Projet* Projet :: SelectionnerProjet(str projet)
     }
 }
 
-Tache* Projet :: SelectionnerTache(str nom, const Projet& projet)
+Tache* Projet :: SelectionnerTache(str nom)
 {
-    auto it = projet.listeTache.find(nom);
+    auto it = listeTache.find(nom);
     
-    if(it != projet.listeTache.end())
+    if(it != listeTache.end())
     {
         return it->second;
     }

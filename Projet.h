@@ -29,6 +29,7 @@ public :
     void AfficherListeProjets();
     void GetInfo();
 
-    bool ProjetExists(str projet);
+    static bool ListeProjetVide();
+    static bool ProjetExists(str projet);
     bool TacheExists(str tache);
 };

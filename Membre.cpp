@@ -23,6 +23,8 @@ Membre :: Membre(str nom, str role)
         this->role = role;
         equipe[this->nom] = this;   
     }
+
+    cout << RED "Erreur le membre que vous voulez ajouter est déjà présent dans l'équipe" << endl << endl;
 }
 
 Membre* Membre :: SelectionnerMembre(str nom)
@@ -35,6 +37,7 @@ Membre* Membre :: SelectionnerMembre(str nom)
     }
 
     cout << RED "Erreur, le membre recherché ne fait pas partie de l'équipe" << endl << endl;
+    return nullptr;
 }
 
 Tache* Membre :: SelectionnerTache(str nom)
@@ -47,6 +50,7 @@ Tache* Membre :: SelectionnerTache(str nom)
     }
 
     cout << RED "Erreur la tâche recherché n'as pas été assignée à ce membre" << endl << endl;
+    return nullptr;
 }
 
 void Membre :: AssignerTache(const Projet& projet, str tache)
@@ -54,6 +58,15 @@ void Membre :: AssignerTache(const Projet& projet, str tache)
     Tache* task = Projet :: SelectionnerTache(tache, projet);
 
     tachesMembre[task->nom] = task;
+}
+
+void Membre :: SupprimerTache(str tache)
+{
+    if (TacheExists(tache))
+    {
+        cout << GRN "Tâche supprimer avec succés";
+        tachesMembre.erase(tache);
+    }
 }
 
 int Membre :: ChargeDeTravail()
