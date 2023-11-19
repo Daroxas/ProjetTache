@@ -1,6 +1,10 @@
 #include "central.h"
+#include <unistd.h>
 #include "Membre.h"
 #include "Projet.h"
+
+unordered_map<str, Tache*> tachesMembre;
+static unordered_map<str, Membre*> equipe;
 
 bool Membre :: MembreExists(str nom)
 {
@@ -36,7 +40,8 @@ Membre* Membre :: SelectionnerMembre(str nom)
         return it->second;
     }
 
-    cout << RED "Erreur, le membre recherché ne fait pas partie de l'équipe" << endl << endl;
+    cout << RED "Erreur, le membre recherché ne fait pas partie de l'équipe" NC << endl << endl;
+    sleep(3);
     return nullptr;
 }
 
@@ -49,7 +54,8 @@ Tache* Membre :: SelectionnerTache(str nom)
         return it->second;
     }
 
-    cout << RED "Erreur la tâche recherché n'as pas été assignée à ce membre" << endl << endl;
+    cout << RED "Erreur la tâche recherché n'as pas été assignée à ce membre" NC << endl << endl;
+    sleep(3);
     return nullptr;
 }
 
@@ -67,6 +73,9 @@ void Membre :: SupprimerTache(str tache)
         cout << GRN "Tâche supprimer avec succés";
         tachesMembre.erase(tache);
     }
+
+    cout << RED "Erreur la tâche à supprimer n'existe pas" NC << endl << endl;
+    sleep(3);
 }
 
 int Membre :: ChargeDeTravail()

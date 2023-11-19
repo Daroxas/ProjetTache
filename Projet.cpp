@@ -1,8 +1,10 @@
 #include "central.h"
+#include <unistd.h>
 #include "Projet.h"
 #include "Tache.h"
 #include "TachePrio.h"
 #include "TacheLongue.h"
+#include "Membre.h"
 
 
 bool Projet :: ProjetExists(str projet)
@@ -80,6 +82,21 @@ void Projet :: RemoveTache(str nom)
 {
     if (TacheExists(nom))
     {
+        auto it = Membre :: equipe.begin();
+        while(it != Membre :: equipe.end())
+        {
+            Membre* membre = it->second;
+            auto it2 = membre->tachesMembre.begin();
+
+            while(it2 != membre->tachesMembre.end())
+            {
+                Tache* tache = it2->second;
+                if (tache->GetNom() == nom)
+                {
+                    membre->SupprimerTache(nom);
+                }
+            }
+        }
         cout << GRN "Tâche '" << nom << "' supprimée avec succés" << endl << endl;
         listeTache.erase(nom);
     }
@@ -93,6 +110,10 @@ Projet* Projet :: SelectionnerProjet(str projet)
     {
         return it->second;
     }
+
+    cout << RED "Erreur le projet rechercher n'éxiste pas" NC << endl << endl;
+    sleep(3);
+    return nullptr;
 }
 
 Tache* Projet :: SelectionnerTache(str nom, const Projet& projet)
@@ -105,6 +126,9 @@ Tache* Projet :: SelectionnerTache(str nom, const Projet& projet)
     }
 
     cout << RED "Erreur, la tâche spécifié n'existe pas" << endl << endl;
+    sleep(3);
+    return nullptr;
+
 }
 
 void Projet :: AfficherCollectionTache()

@@ -7,10 +7,12 @@ protected :
 
     str nom;
     str role;
-    static unordered_map<str, Membre*> equipe;
-    unordered_map<str, Tache*> tachesMembre;
+    
 
 public :
+
+    unordered_map<str, Tache*> tachesMembre;
+    static unordered_map<str, Membre*> equipe;
 
     Membre(str nom, str role);
     static void SupprimerMembre(str nom);
