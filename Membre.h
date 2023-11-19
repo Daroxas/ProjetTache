@@ -14,6 +14,14 @@ public :
 
     Membre(str nom, str role);
 
+    str GetNom();
+    str GetRole();
+    void GetInfo();
+
+    void AfficherEquipe();
+    void AfficherTacheAffecter();
+
+
     Membre* SelectionnerMembre(str nom);
     Tache* SelectionnerTache(str nom);
 

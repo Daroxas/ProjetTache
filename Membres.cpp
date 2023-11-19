@@ -61,3 +61,50 @@ int Membre :: ChargeDeTravail()
     return tachesMembre.size();
 }
 
+str Membre :: GetNom()
+{
+    return nom;
+}
+
+str Membre :: GetRole()
+{
+    return role;
+}
+
+void Membre :: GetInfo()
+{
+    cout << NC "Nom : " << GetNom() << endl;
+    cout << "Role : " << GetRole() << endl;
+}
+
+void Membre :: AfficherEquipe()
+{
+    auto it = equipe.begin();
+
+    cout << NC "Membres de l'équipe : " << endl << endl;
+
+    while (it != equipe.end())
+    {
+        Membre* member = it->second;
+
+        cout << "Nom : " << member->GetNom() << "  Role : " << member->GetRole() << endl;
+    }
+
+    cout << endl;
+}
+
+void Membre :: AfficherTacheAffecter()
+{
+    auto it = tachesMembre.begin();
+
+    cout << NC "Tâches affecter à ce membre : " << endl << endl;
+
+    while (it != tachesMembre.end())
+    {
+        Tache* task = it->second;
+
+        cout << "Nom : " << task->GetNom() << "  Description : " << task->GetDescription() << endl;
+    }
+
+    cout << endl;
+}
